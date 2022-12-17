@@ -1,5 +1,4 @@
 const { createSlice } = require("@reduxjs/toolkit");
-
 export const signup = createSlice({
     name: 'signup',
     initialState: {

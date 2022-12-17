@@ -1,11 +1,13 @@
 import { Form, Button, Row, Col, Container,  Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import {useSelector, useDispatch} from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch} from 'react-redux';
 import { useState } from 'react';
 import {addUser} from '../state_management/reducers/signup';
+import swal from 'sweetalert';
 export default function SignUp() {
-  const val = useSelector((state)=>state.signupUpdatedState.signupUpdatedState.value);
+  // const val = useSelector((state)=>state.signupUpdatedState.signupUpdatedState.value);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     name: '',
     email: '',
@@ -15,8 +17,21 @@ export default function SignUp() {
     event.preventDefault();
     setUserData({...userData,[event.target.name]: event.target.value})
   }
-  if(val.length > 0){
-    console.log(val);
+  const registerUser = (e) => {
+    e.preventDefault();
+    dispatch(addUser(userData));
+    swal({
+      title: "Congratulation.",
+      text: "Successfully registered.",
+      icon: "success",
+      buttons: "Sign in",
+      dangerMode: true,
+    })
+    .then((goSignin) => {
+      if (goSignin) {
+          navigate("/");
+      } 
+    });
   }
   return (
     <>
@@ -26,10 +41,7 @@ export default function SignUp() {
           <h4 className='text-center'>Sign Up</h4>
         </Card.Header>
         <Card.Body>
-          <Form onSubmit={(e) => {
-            e.preventDefault();
-            dispatch(addUser(userData));
-          }}>
+          <Form onSubmit={ registerUser }>
             <Row className='justify-content-center'>
               <Col md={6}>
                 <Form.Group className="mb-3">
