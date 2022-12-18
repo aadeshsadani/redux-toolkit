@@ -46,13 +46,13 @@ export default function SignUp() {
               <Col md={6}>
                 <Form.Group className="mb-3">
                   <Form.Label>First Name</Form.Label>
-                  <Form.Control type="text" name="name" onChange={setData} placeholder="Enter first name" />
+                  <Form.Control type="text" name="name" onChange={setData} required placeholder="Enter first name" />
                 </Form.Group>
               </Col>
               <Col md={6}>
                 <Form.Group className="mb-3">
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" name="email" onChange={setData} placeholder="Enter email" />
+                  <Form.Control type="email" name="email" onChange={setData} required placeholder="Enter email" />
                 </Form.Group>
               </Col>
             </Row>
@@ -60,7 +60,7 @@ export default function SignUp() {
               <Col md={12}>
                 <Form.Group className="mb-3">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control type="text" name="password" onChange={setData} placeholder="Password" />
+                  <Form.Control type="password" name="password" onChange={setData } required placeholder="Password" />
                 </Form.Group>
               </Col>
             </Row>

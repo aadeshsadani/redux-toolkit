@@ -5,7 +5,7 @@ import {Form, Button} from 'react-bootstrap';
 import { useSelector } from 'react-redux'; 
 // import SweetAlert from 'react-bootstrap-sweetalert';
 import swal from 'sweetalert';
-const Signin = () => {
+const Signin = (props) => {
     const navigate = useNavigate();
     const stateUPdatedUserRecord = useSelector((state) => state.signupUpdatedState.signupUpdatedState.value);
     const [formDataobject, setFormDataobject] = useState({
@@ -37,7 +37,9 @@ const Signin = () => {
             if(passwordAuthentication.length === 0){
                 alert('sorry invalid password or email!');
             }else{
-                console.log("state",stateUPdatedUserRecord);
+                props.sessionUpdate(true);
+                props.getUserName(emailAuthentication[0].name);
+                navigate("/dashboard");
             }
         }
         
@@ -57,7 +59,7 @@ const Signin = () => {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type='text' name='password' onChange={(e) => {setFormDataobject({...formDataobject, [e.target.name]: e.target.value})}} required placeholder='Enter Password' />
+                        <Form.Control type='password' name='password' onChange={(e) => {setFormDataobject({...formDataobject, [e.target.name]: e.target.value})}} required placeholder='Enter Password' />
                     </Form.Group>
                     <Button variant='primary' type='submit' className='mt-2'>
                         Sign in
